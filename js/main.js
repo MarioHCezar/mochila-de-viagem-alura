@@ -15,14 +15,17 @@ form.addEventListener("submit", (e) => {
   const exists = itens.find((element) => element.nome === nome.value);
 
   const itemAtual = {
-    "nome": nome.value,
-    "quantidade": quantidade.value,
+    nome: nome.value,
+    quantidade: quantidade.value,
   };
 
   if (exists) {
     itemAtual.id = exists.id;
+    updateElement(itemAtual);
+    console.log(exists.id);
+    itens[itens.findIndexexists(element => element.id)] = itemAtual;
   } else {
-    itemAtual.id = itens.length + 1;
+    itemAtual.id = itens[itens.length - 1] ? (itens[itens.length - 1]).id + 1 : 0;
 
     createElement(itemAtual);
     itens.push(itemAtual);
@@ -45,6 +48,30 @@ function createElement(item) {
 
   novoItem.appendChild(numeroItem);
   novoItem.innerHTML += item.nome;
+  novoItem.appendChild(deleteButton(item.id));
 
   lista.appendChild(novoItem);
+}
+
+function updateElement(item) {
+  document.querySelector(`[data-id="${item.id}"]`).innerHTML = item.quantidade;
+}
+
+function deleteButton(id) {
+  const button = document.createElement("button");
+  button.innerText = "X";
+  button.addEventListener("click", function () {
+    deleteElement(this.parentNode, id);
+  });
+
+  return button;
+}
+
+function deleteElement(tag, id) {
+  tag.remove();
+  itens.splice(
+    itens.findIndex((element) => element.id === id),
+    1
+  );
+  localStorage.setItem("itens", JSON.stringify(itens));
 }

@@ -157,6 +157,12 @@ html {
   background-color: #40112d;
   color: #ffffff;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.cadastrar:hover {
+  background-color: #40112dd3;
 }
 
 .lista {
@@ -188,6 +194,18 @@ html {
   background: #c5965f;
   font-weight: 400;
 }
+
+button{
+  background-color: #C5965F;
+  border: none;
+}
+
+button:hover{
+  background-color: #c5955f9f;
+  border: none;
+}
+
+
 
 @media screen and (max-width: 960px) {
   .conteudo {
